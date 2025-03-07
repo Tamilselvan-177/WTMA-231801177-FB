@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen p-6">
+    <div class="w-full max-w-lg p-6 bg-gray-800 shadow-lg rounded-2xl">
+        <h2 class="text-xl font-bold mb-4 text-center">Signup Form</h2>
+        <form id="signupForm" class="space-y-4">
+            <input type="text" id="firstName" placeholder="First Name" class="w-full p-2 rounded bg-gray-700 text-white">
+            <p id="firstNameError" class="text-red-500 text-sm hidden">First Name must be at least 4 characters.</p>
+
+            <input type="text" id="lastName" placeholder="Last Name" class="w-full p-2 rounded bg-gray-700 text-white">
+            <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name must not be empty.</p>
+
+            <input type="email" id="email" placeholder="Email" class="w-full p-2 rounded bg-gray-700 text-white">
+            <p id="emailError" class="text-red-500 text-sm hidden">Invalid email format.</p>
+
+            <input type="date" id="dob" class="w-full p-2 rounded bg-gray-700 text-white">
+            <p id="dobError" class="text-red-500 text-sm hidden">Invalid date format.</p>
+
+            <input type="number" id="age" placeholder="Age" class="w-full p-2 rounded bg-gray-700 text-white">
+            <p id="ageError" class="text-red-500 text-sm hidden">Age must be a 2-digit number.</p>
+
+            <input type="text" id="phone" placeholder="Phone Number" class="w-full p-2 rounded bg-gray-700 text-white">
+            <p id="phoneError" class="text-red-500 text-sm hidden">Phone number must be 10 digits.</p>
+
+            <textarea id="address" placeholder="Address" class="w-full p-2 rounded bg-gray-700 text-white"></textarea>
+            <p id="addressError" class="text-red-500 text-sm hidden">Address cannot be empty.</p>
+
+            <button type="submit" class="w-full bg-blue-600 py-2 rounded-lg hover:bg-blue-700">Signup</button>
+        </form>
+    </div>
+
+    <div id="usersTable" class="w-full max-w-2xl mt-6 p-4 bg-gray-800 shadow-lg rounded-2xl hidden">
+        <h3 class="text-lg font-semibold mb-4 text-center">Registered Users</h3>
+        <table class="w-full border border-gray-600 text-white">
+            <thead>
+                <tr class="bg-gray-700">
+                    <th class="border border-gray-600 px-4 py-2">First Name</th>
+                    <th class="border border-gray-600 px-4 py-2">Last Name</th>
+                    <th class="border border-gray-600 px-4 py-2">Email</th>
+                    <th class="border border-gray-600 px-4 py-2">DOB</th>
+                    <th class="border border-gray-600 px-4 py-2">Age</th>
+                    <th class="border border-gray-600 px-4 py-2">Phone</th>
+                    <th class="border border-gray-600 px-4 py-2">Address</th>
+                </tr>
+            </thead>
+            <tbody id="userList"></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let firstName = document.getElementById("firstName").value.trim();
+            let lastName = document.getElementById("lastName").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let dob = document.getElementById("dob").value;
+            let age = document.getElementById("age").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let address = document.getElementById("address").value.trim();
+            
+            let valid = true;
+
+            function showError(id, condition) {
+                document.getElementById(id).classList.toggle("hidden", !condition);
+                return condition;
+            }
+
+            valid &= !showError("firstNameError", firstName.length < 4);
+            valid &= !showError("lastNameError", lastName.length < 1);
+            valid &= !showError("emailError", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+            valid &= !showError("dobError", !dob);
+            valid &= !showError("ageError", !/^[0-9]{2}$/.test(age));
+            valid &= !showError("phoneError", !/^[0-9]{10}$/.test(phone));
+            valid &= !showError("addressError", address.length === 0);
+            
+            if (valid) {
+                let table = document.getElementById("userList");
+                let row = table.insertRow();
+                row.insertCell(0).textContent = firstName;
+                row.insertCell(1).textContent = lastName;
+                row.insertCell(2).textContent = email;
+                row.insertCell(3).textContent = dob;
+                row.insertCell(4).textContent = age;
+                row.insertCell(5).textContent = phone;
+                row.insertCell(6).textContent = address;
+                
+                document.getElementById("usersTable").classList.remove("hidden");
+                document.getElementById("signupForm").reset();
+            }
+        });
+    </script>
+</body>
+</html>
