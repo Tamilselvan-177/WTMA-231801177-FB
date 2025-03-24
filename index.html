@@ -5,52 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-image {
+            background-image: url('https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        .form-container {
+            background-color: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(5px);
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen p-6">
-    <div class="w-full max-w-lg p-6 bg-gray-800 shadow-lg rounded-2xl">
-        <h2 class="text-xl font-bold mb-4 text-center">Signup Form</h2>
+<body class="bg-image text-white flex flex-col items-center min-h-screen p-6">
+    <div class="w-full max-w-lg p-6 form-container shadow-lg rounded-2xl">
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-400">Signup Form</h2>
         <form id="signupForm" class="space-y-4">
-            <input type="text" id="firstName" placeholder="First Name" class="w-full p-2 rounded bg-gray-700 text-white">
-            <p id="firstNameError" class="text-red-500 text-sm hidden">First Name must be at least 4 characters.</p>
+            <div>
+                <input type="text" id="firstName" placeholder="First Name" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none">
+                <p id="firstNameError" class="text-red-400 text-sm hidden mt-1">First Name must be at least 4 alphabetic characters.</p>
+            </div>
 
-            <input type="text" id="lastName" placeholder="Last Name" class="w-full p-2 rounded bg-gray-700 text-white">
-            <p id="lastNameError" class="text-red-500 text-sm hidden">Last Name must not be empty.</p>
+            <div>
+                <input type="text" id="lastName" placeholder="Last Name" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none">
+                <p id="lastNameError" class="text-red-400 text-sm hidden mt-1">Last Name must be at least 1 alphabetic character.</p>
+            </div>
 
-            <input type="email" id="email" placeholder="Email" class="w-full p-2 rounded bg-gray-700 text-white">
-            <p id="emailError" class="text-red-500 text-sm hidden">Invalid email format.</p>
+            <div>
+                <input type="email" id="email" placeholder="Email" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none">
+                <p id="emailError" class="text-red-400 text-sm hidden mt-1">Please enter a valid email address (name@domain.com).</p>
+            </div>
 
-            <input type="date" id="dob" class="w-full p-2 rounded bg-gray-700 text-white">
-            <p id="dobError" class="text-red-500 text-sm hidden">Invalid date format.</p>
+            <div>
+                <label class="block text-gray-300 mb-1">Date of Birth</label>
+                <input type="date" id="dob" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none">
+                <p id="dobError" class="text-red-400 text-sm hidden mt-1">Please select a valid date of birth.</p>
+            </div>
 
-            <input type="number" id="age" placeholder="Age" class="w-full p-2 rounded bg-gray-700 text-white">
-            <p id="ageError" class="text-red-500 text-sm hidden">Age must be a 2-digit number.</p>
+            <div>
+                <input type="number" id="age" placeholder="Age" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none">
+                <p id="ageError" class="text-red-400 text-sm hidden mt-1">Age must be a 2-digit number (10-99).</p>
+            </div>
 
-            <input type="text" id="phone" placeholder="Phone Number" class="w-full p-2 rounded bg-gray-700 text-white">
-            <p id="phoneError" class="text-red-500 text-sm hidden">Phone number must be 10 digits.</p>
+            <div>
+                <label class="block text-gray-300 mb-2">Gender</label>
+                <div class="flex items-center space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="gender" value="male" class="form-radio text-blue-500">
+                        <span class="ml-2">Male</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="gender" value="female" class="form-radio text-blue-500">
+                        <span class="ml-2">Female</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="gender" value="other" class="form-radio text-blue-500">
+                        <span class="ml-2">Other</span>
+                    </label>
+                </div>
+                <p id="genderError" class="text-red-400 text-sm hidden mt-1">Please select a gender.</p>
+            </div>
 
-            <textarea id="address" placeholder="Address" class="w-full p-2 rounded bg-gray-700 text-white"></textarea>
-            <p id="addressError" class="text-red-500 text-sm hidden">Address cannot be empty.</p>
+            <div>
+                <input type="text" id="phone" placeholder="Phone Number" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none">
+                <p id="phoneError" class="text-red-400 text-sm hidden mt-1">Phone number must be exactly 10 digits.</p>
+            </div>
 
-            <button type="submit" class="w-full bg-blue-600 py-2 rounded-lg hover:bg-blue-700">Signup</button>
+            <div>
+                <textarea id="address" placeholder="Address" rows="3" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"></textarea>
+                <p id="addressError" class="text-red-400 text-sm hidden mt-1">Address cannot be empty.</p>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 py-3 rounded-lg hover:bg-blue-700 font-medium text-lg transition duration-200">Signup</button>
         </form>
     </div>
 
-    <div id="usersTable" class="w-full max-w-2xl mt-6 p-4 bg-gray-800 shadow-lg rounded-2xl hidden">
-        <h3 class="text-lg font-semibold mb-4 text-center">Registered Users</h3>
-        <table class="w-full border border-gray-600 text-white">
-            <thead>
-                <tr class="bg-gray-700">
-                    <th class="border border-gray-600 px-4 py-2">First Name</th>
-                    <th class="border border-gray-600 px-4 py-2">Last Name</th>
-                    <th class="border border-gray-600 px-4 py-2">Email</th>
-                    <th class="border border-gray-600 px-4 py-2">DOB</th>
-                    <th class="border border-gray-600 px-4 py-2">Age</th>
-                    <th class="border border-gray-600 px-4 py-2">Phone</th>
-                    <th class="border border-gray-600 px-4 py-2">Address</th>
-                </tr>
-            </thead>
-            <tbody id="userList"></tbody>
-        </table>
+    <div id="usersTable" class="w-full max-w-2xl mt-6 p-6 form-container shadow-lg rounded-2xl hidden">
+        <h3 class="text-xl font-semibold mb-4 text-center text-blue-400">Registered Users</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full border border-gray-600 text-white">
+                <thead>
+                    <tr class="bg-gray-700">
+                        <th class="border border-gray-600 px-4 py-2">First Name</th>
+                        <th class="border border-gray-600 px-4 py-2">Last Name</th>
+                        <th class="border border-gray-600 px-4 py-2">Email</th>
+                        <th class="border border-gray-600 px-4 py-2">DOB</th>
+                        <th class="border border-gray-600 px-4 py-2">Age</th>
+                        <th class="border border-gray-600 px-4 py-2">Gender</th>
+                        <th class="border border-gray-600 px-4 py-2">Phone</th>
+                        <th class="border border-gray-600 px-4 py-2">Address</th>
+                    </tr>
+                </thead>
+                <tbody id="userList" class="divide-y divide-gray-600"></tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -64,6 +114,7 @@
             let age = document.getElementById("age").value.trim();
             let phone = document.getElementById("phone").value.trim();
             let address = document.getElementById("address").value.trim();
+            let gender = document.querySelector('input[name="gender"]:checked');
             
             let valid = true;
 
@@ -72,27 +123,52 @@
                 return condition;
             }
 
-            valid &= !showError("firstNameError", firstName.length < 4);
-            valid &= !showError("lastNameError", lastName.length < 1);
-            valid &= !showError("emailError", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+            // Validate First Name (alphabets only, min 4 chars)
+            valid &= !showError("firstNameError", 
+                firstName.length < 4 || !/^[a-zA-Z]+$/.test(firstName));
+            
+            // Validate Last Name (alphabets only, min 1 char)
+            valid &= !showError("lastNameError", 
+                lastName.length < 1 || !/^[a-zA-Z]+$/.test(lastName));
+            
+            // Validate Email
+            valid &= !showError("emailError", 
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+            
+            // Validate Date of Birth
             valid &= !showError("dobError", !dob);
-            valid &= !showError("ageError", !/^[0-9]{2}$/.test(age));
+            
+            // Validate Age (2 digits, between 10-99)
+            valid &= !showError("ageError", 
+                !/^[0-9]{2}$/.test(age) || parseInt(age) < 10 || parseInt(age) > 99);
+            
+            // Validate Gender (must be selected)
+            valid &= !showError("genderError", gender === null);
+            
+            // Validate Phone (exactly 10 digits)
             valid &= !showError("phoneError", !/^[0-9]{10}$/.test(phone));
+            
+            // Validate Address (not empty)
             valid &= !showError("addressError", address.length === 0);
             
             if (valid) {
                 let table = document.getElementById("userList");
                 let row = table.insertRow();
+                row.className = "hover:bg-gray-700";
                 row.insertCell(0).textContent = firstName;
                 row.insertCell(1).textContent = lastName;
                 row.insertCell(2).textContent = email;
                 row.insertCell(3).textContent = dob;
                 row.insertCell(4).textContent = age;
-                row.insertCell(5).textContent = phone;
-                row.insertCell(6).textContent = address;
+                row.insertCell(5).textContent = gender.value;
+                row.insertCell(6).textContent = phone;
+                row.insertCell(7).textContent = address;
                 
                 document.getElementById("usersTable").classList.remove("hidden");
                 document.getElementById("signupForm").reset();
+                
+                // Scroll to the table
+                document.getElementById("usersTable").scrollIntoView({ behavior: 'smooth' });
             }
         });
     </script>
